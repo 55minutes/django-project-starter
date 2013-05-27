@@ -1,0 +1,21 @@
+#!/bin/bash
+
+settings_file={{ project_name }}/settings.py
+
+if [ $# -ne 0 ]; then
+    req=$1
+else
+    req='requirements/local.txt'
+fi
+
+# read -s -p "Postmark API Key: " postmark_api_key; echo
+
+pip install -U -r $req
+pip install -e .
+cat > $settings_file << EOF
+from {{ project_name}}.config.local import *
+
+# POSTMARK_API_KEY = '$postmark_api_key'
+LOGIN_URL = '/'
+EOF
+echo "Created '$settings_file'"
