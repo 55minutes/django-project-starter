@@ -192,8 +192,8 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
+    'django_bootstrap_staticfiles',
     'south',
-    'static_django_twitter_bootstrap',
 )
 
 # Apps specific for this project go here.
