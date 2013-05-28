@@ -1,6 +1,9 @@
 # django-project-starter
 
-A project template for Django 1.5.1.
+A project template for Django 1.5.1. In addition to the basic Django
+infranstructure, this template also includes:
+
+1.  A [Vagrant][] configuration file for use with [Digital Ocean][].
 
 To use this project follow these steps:
 
@@ -55,7 +58,7 @@ To create a new Django project called '**icecream**' using
 django-twoscoops-project, run the following command::
 
     $ django-admin.py startproject \
-        --template=https://github.com/55minutes/django-project-starter/archive/basic.zip \
+        --template=https://github.com/55minutes/django-project-starter/archive/vagrant-digitalocean.zip \
         --extension=py,md,html --name=setup_dev icecream
 
 # Set up the development environment
@@ -67,5 +70,7 @@ django-twoscoops-project, run the following command::
 
 * [Two Scoops of Django](https://django.2scoops.org)
 
+[Vagrant]: http://www.vagrantup.com
+[Digital Ocean]: https://www.digitalocean.com
 [virtualenv]: http://www.virtualenv.org
 [virtualenvwrapper]: https://bitbucket.org/dhellmann/virtualenvwrapper/
