@@ -5,6 +5,8 @@ from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 
 
+# TODO: Normalize on PACKAGE_ROOT and PROJECT_ROOT nomenclature
+
 ########## PATH CONFIGURATION
 # Absolute filesystem path to the Django project directory:
 DJANGO_ROOT = dirname(dirname(abspath(__file__)))
