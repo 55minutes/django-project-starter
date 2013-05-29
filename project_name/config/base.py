@@ -5,21 +5,19 @@ from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 
 
-# TODO: Normalize on PACKAGE_ROOT and PROJECT_ROOT nomenclature
-
 ########## PATH CONFIGURATION
-# Absolute filesystem path to the Django project directory:
-DJANGO_ROOT = dirname(dirname(abspath(__file__)))
+# Absolute filesystem path to the project directory:
+PROJECT_ROOT = dirname(dirname(abspath(__file__)))
 
-# Absolute filesystem path to the top-level project folder:
-SITE_ROOT = DJANGO_ROOT
+# Absolute filesystem path to the top-level package folder:
+PACKAGE_ROOT = dirname(PROJECT_ROOT)
 
 # Site name:
-SITE_NAME = basename(DJANGO_ROOT)
+SITE_NAME = basename(PROJECT_ROOT)
 
 # Add our project to our pythonpath, this way we don't need to type our project
 # name in our dotted import paths:
-path.append(DJANGO_ROOT)
+path.append(PACKAGE_ROOT)
 ########## END PATH CONFIGURATION
 
 
@@ -81,7 +79,7 @@ USE_TZ = True
 
 ########## MEDIA CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = normpath(join(SITE_ROOT, 'media'))
+MEDIA_ROOT = normpath(join(PROJECT_ROOT, 'media'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
@@ -90,14 +88,14 @@ MEDIA_URL = '/media/'
 
 ########## STATIC FILE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = normpath(join(SITE_ROOT, 'assets'))
+STATIC_ROOT = normpath(join(PROJECT_ROOT, 'assets'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (
-    normpath(join(SITE_ROOT, 'static')),
+    normpath(join(PROJECT_ROOT, 'static')),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
@@ -125,7 +123,7 @@ ALLOWED_HOSTS = []
 ########## FIXTURE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
 FIXTURE_DIRS = (
-    normpath(join(SITE_ROOT, 'fixtures')),
+    normpath(join(PROJECT_ROOT, 'fixtures')),
 )
 ########## END FIXTURE CONFIGURATION
 
@@ -151,7 +149,7 @@ TEMPLATE_LOADERS = (
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
 TEMPLATE_DIRS = (
-    normpath(join(SITE_ROOT, 'templates')),
+    normpath(join(PROJECT_ROOT, 'templates')),
 )
 ########## END TEMPLATE CONFIGURATION
 
