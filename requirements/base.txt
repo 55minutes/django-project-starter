@@ -1,5 +1,4 @@
 Django==1.5.1
-Fabric==1.6.1
 South==0.7.6
 django-bootstrap-staticfiles==2.3.2
 docutils==0.10
