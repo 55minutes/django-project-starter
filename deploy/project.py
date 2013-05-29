@@ -10,7 +10,26 @@ from django.utils.crypto import get_random_string
 from fabric.api import task
 from fabric.colors import green
 
-from . import PROJECT_ROOT
+from . import PROJECT_ROOT, VIRTUAL_ENV
+
+
+POSTACTIVATE = """\
+#!/bin/bash
+# This hook is run after this virtualenv is activated.
+
+if [[ -f {} ]]; then
+  export DJANGO_SETTINGS_MODULE={{ project_name }}.settings;
+fi;
+"""
+
+POSTDEACTIVATE = """\
+#!/bin/bash
+# This hook is run after this virtualenv is deactivated.
+
+unset DJANGO_SETTINGS_MODULE
+"""
+
+LOCAL_SETTINGS = join(PROJECT_ROOT, 'settings.py')
 
 
 def write_settings(settings_file, target, settings):
@@ -26,14 +45,28 @@ def write_settings(settings_file, target, settings):
             print("{} = '{}'".format(k, v), file=of)
 
 
-@task()
-def local_setup():
+def generate_settings():
     "Generate {{ project_name }}/settings.py"
     target = 'local'
     settings = OrderedDict()
     settings['SECRET_KEY'] = get_random_string(54)
     settings['DATABASES__DEFAULT__PASSWORD'] = getpass('PostgreSQL Password: ')
     settings['POSTMARK_API_KEY'] = getpass('Postmark API Key: ')
-    local_settings = join(PROJECT_ROOT, 'settings.py')
-    write_settings(local_settings, target, settings)
-    print(green('{} generated'.format(local_settings)))
+    write_settings(LOCAL_SETTINGS, target, settings)
+    print(green('{} generated'.format(LOCAL_SETTINGS)))
+
+
+def generate_virtualenvwrapper_hooks():
+    "Generate $VIRTUAL_ENV/bin/ hooks"
+    vbin = join(VIRTUAL_ENV, 'bin')
+    with open(join(vbin, 'postactivate'), 'w+') as of:
+        of.write(POSTACTIVATE.format(LOCAL_SETTINGS))
+    with open(join(vbin, 'postdeactivate'), 'w+') as of:
+        of.write(POSTDEACTIVATE)
+
+
+@task()
+def local_setup():
+    "Generate {{ project_name }}/settings.py and $VIRTUAL_ENV/bin/ hooks"
+    generate_settings()
+    generate_virtualenvwrapper_hooks()
