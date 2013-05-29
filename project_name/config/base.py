@@ -240,5 +240,5 @@ LOGGING = {
 
 ########## WSGI CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = '{{ project_name }}.wsgi.application'
 ########## END WSGI CONFIGURATION
