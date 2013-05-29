@@ -1,5 +1,6 @@
-from base import *
 from os.path import join
+
+from .base import *
 
 ########## TEST SETTINGS
 TEST_RUNNER = 'discover_runner.DiscoverRunner'
