@@ -29,7 +29,7 @@ def write_settings(settings_file, target, settings):
 @task()
 def local_setup():
     "Generate {{ project_name }}/settings.py"
-    target = 'development'
+    target = 'local'
     settings = OrderedDict()
     settings['SECRET_KEY'] = get_random_string(54)
     settings['DATABASES__DEFAULT__PASSWORD'] = getpass('PostgreSQL Password: ')
