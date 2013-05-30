@@ -3,33 +3,26 @@ from __future__ import print_function
 from collections import OrderedDict
 from getpass import getpass
 from os import linesep
-from os.path import join
+from os.path import expanduser, join
+from string import Template
 
 from django.utils.crypto import get_random_string
 
-from fabric.api import task
+from fabric.api import env, task
 from fabric.colors import green
+from fabric.utils import apply_lcwd
 
-from . import PROJECT_ROOT, VIRTUAL_ENV
+from . import PACKAGE_ROOT, PROJECT_ROOT, VIRTUAL_ENV
 
-
-POSTACTIVATE = """\
-#!/bin/bash
-# This hook is run after this virtualenv is activated.
-
-if [[ -f {} ]]; then
-  export DJANGO_SETTINGS_MODULE={{ project_name }}.settings;
-fi;
-"""
-
-POSTDEACTIVATE = """\
-#!/bin/bash
-# This hook is run after this virtualenv is deactivated.
-
-unset DJANGO_SETTINGS_MODULE
-"""
 
 LOCAL_SETTINGS = join(PROJECT_ROOT, 'settings.py')
+
+
+def render_template(filename, context=None):
+    filename = apply_lcwd(filename, env)
+    with open(expanduser(filename)) as inputfile:
+        text = Template(inputfile.read())
+    return text.substitute(context or {})
 
 
 def write_settings(settings_file, target, settings):
@@ -58,11 +51,15 @@ def generate_settings():
 
 def generate_virtualenvwrapper_hooks():
     "Generate $VIRTUAL_ENV/bin/ hooks"
-    vbin = join(VIRTUAL_ENV, 'bin')
-    with open(join(vbin, 'postactivate'), 'w+') as of:
-        of.write(POSTACTIVATE.format(LOCAL_SETTINGS))
-    with open(join(vbin, 'postdeactivate'), 'w+') as of:
-        of.write(POSTDEACTIVATE)
+    ve_bin = join(VIRTUAL_ENV, 'bin')
+    template_dir = join(PACKAGE_ROOT, 'deploy', 'templates')
+    context = {
+        'local_settings': LOCAL_SETTINGS,
+        'project_name': '{{ project_name }}',
+    }
+    for hook in ('postactivate', 'postdeactivate'):
+        with open(join(ve_bin, hook), 'w+') as of:
+            of.write(render_template(join(template_dir, hook), context))
 
 
 @task()
