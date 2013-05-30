@@ -56,7 +56,7 @@ django-twoscoops-project, run the following command::
 
     $ django-admin.py startproject \
         --template=https://github.com/55minutes/django-project-starter/archive/basic.zip \
-        --extension=py,md,html --name=setup_dev icecream
+        --extension=py,md,html --name=local_setup icecream
 
 # Set up the development environment
 
