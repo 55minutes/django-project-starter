@@ -60,7 +60,7 @@ django-twoscoops-project, run the following command::
 
 # Set up the development environment
 
-    bin/local_setup
+    source bin/local_setup
 
 
 # Acknowledgements
