@@ -7,6 +7,6 @@ else
 fi
 
 pip install -U -r $req
-fab project.local_setup
+fab target.local project.local_setup
 
 export DJANGO_SETTINGS_MODULE={{ project_name }}.settings
