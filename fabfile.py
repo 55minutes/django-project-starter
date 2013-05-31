@@ -1,1 +1,1 @@
-from deploy import project
+from deploy import project, target
