@@ -9,4 +9,6 @@ fi
 pip install -U -r $req
 fab target.local project.local_setup
 
+# TODO: Create the pg database
+
 export DJANGO_SETTINGS_MODULE={{ project_name }}.settings

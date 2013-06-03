@@ -1,5 +1,7 @@
 # django-project-starter
 
+**TODO: PostgreSQL documentation**
+
 A project template for Django 1.5.1.
 
 To use this project follow these steps:
