@@ -264,8 +264,20 @@ PIPELINE_CSS = {
 
 PIPELINE_JS = {
     'bootstrap': dict(
-        source_filenames = (
-            'js/*.js'
+        source_filenames=(
+            'js/bootstrap-affix.js',
+            'js/bootstrap-alert.js',
+            'js/bootstrap-button.js',
+            'js/bootstrap-carousel.js',
+            'js/bootstrap-collapse.js',
+            'js/bootstrap-dropdown.js',
+            'js/bootstrap-modal.js',
+            'js/bootstrap-popover.js',
+            'js/bootstrap-scrollspy.js',
+            'js/bootstrap-tab.js',
+            'js/bootstrap-tooltip.js',
+            'js/bootstrap-transition.js',
+            'js/bootstrap-typeahead.js',
         ),
         output_filename = 'js/bootstrap.js',
     )
