@@ -1,14 +1,21 @@
 #!/bin/bash
 
+# Specify your own requirements file, otherwise default to requirements/local.txt
 if [ $# -ne 0 ]; then
     req=$1
 else
     req='requirements/local.txt'
 fi
 
+# Pip install the requirements
 pip install -U -r $req
-fab target.local project.local_setup
+fab target.local project.setup
 
-# TODO: Create the pg database
-
+# Set up our Django environment
 export DJANGO_SETTINGS_MODULE={{ project_name }}.settings
+
+# Set up our ruby environment
+rvm use `cat .ruby-version | tr -d "\n" && echo "@" | tr -d "\n" && cat .ruby-gemset`
+
+# Create the database, this has to happen after the DJANGO_SETTINGS_MODULE has been set
+fab target.local pg.create_db
