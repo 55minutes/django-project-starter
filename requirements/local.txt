@@ -3,6 +3,4 @@
 # Local development dependencies go here
 Fabric==1.6.1
 bpython==0.12
-coverage==3.6
-django-discover-runner==0.4
 django-debug-toolbar==0.9.4
