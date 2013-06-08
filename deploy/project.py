@@ -28,7 +28,6 @@ def render_settings():
     return render_template(join(env.template_dir, 'settings.py'), env)
 
 
-@task()
 def local_setup():
     "Generate {{ project_name }}/settings.py and $VIRTUAL_ENV/bin hooks"
     require('settings_fp', 'project_name')
@@ -43,3 +42,11 @@ def local_setup():
         with open(hook_file, 'w+') as of:
             of.write(render_template(join(env.template_dir, hook), env))
         print(green('{} generated'.format(hook_file)))
+
+
+@task()
+def setup():
+    if env.is_remote:
+        pass
+    else:
+        local_setup()
