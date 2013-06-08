@@ -192,8 +192,9 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-    'django_bootstrap_staticfiles',
+    'pipeline',
     'south',
+    'twitter_bootstrap',
 )
 
 # Apps specific for this project go here.
@@ -242,3 +243,38 @@ LOGGING = {
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = '{{ project_name }}.wsgi.application'
 ########## END WSGI CONFIGURATION
+
+
+########## DJANGO-PIEPLINE CONFIGURATION
+# See: http://django-pipeline.readthedocs.org/en/latest/configuration.html
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+PIPELINE_CSS = {
+    'bootstrap': {
+        'source_filenames': (
+            'less/bootstrap.less',
+            'less/responsive.less',
+        ),
+        'output_filename': 'css/bootstrap.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        }
+    }
+}
+
+PIPELINE_JS = {
+    'bootstrap': dict(
+        source_filenames = (
+            'js/*.js'
+        ),
+        output_filename = 'js/bootstrap.js',
+    )
+}
+
+PIPELINE_COMPILERS = (
+    'pipeline.compilers.less.LessCompiler',
+)
+
+PIPELINE_CSS_COMPRESSOR = None
+PIPELINE_JS_COMPRESSOR = None
+########## END DJANGO-PIEPLINE CONFIGURATION
