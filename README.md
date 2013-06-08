@@ -2,7 +2,10 @@
 
 **TODO: PostgreSQL documentation**
 
-A project template for Django 1.5.1.
+A project template for Django 1.5.1. In addition to the basic Django
+infranstructure, this template also includes:
+
+1.  A [Vagrant][] configuration file for use with [Digital Ocean][].
 
 To use this project follow these steps:
 
@@ -60,7 +63,9 @@ django-admin.py startproject \
 source bin/local_setup
 ```
 
-Now test to make sure your Django project is up and running:
+    $ django-admin.py startproject \
+        --template=https://github.com/55minutes/django-project-starter/archive/vagrant-digitalocean.zip \
+        --extension=py,md,html --name=setup_dev icecream
 
 ```bash
 django-admin.py runserver
@@ -75,6 +80,8 @@ Now go make something amazing using Django!
 
 * [Two Scoops of Django](https://django.2scoops.org)
 
+[Vagrant]: http://www.vagrantup.com
+[Digital Ocean]: https://www.digitalocean.com
 [virtualenv]: http://www.virtualenv.org
 [virtualenvwrapper]: https://bitbucket.org/dhellmann/virtualenvwrapper/
 [mkvirtualenv]: http://virtualenvwrapper.readthedocs.org/en/latest/command_ref.html#mkvirtualenv
