@@ -7,12 +7,14 @@ from fabric.api import env, task
 
 
 env.project_name = '{{ project_name }}'
+env.is_remote = True # Assume we're dealing with a remote host
 
 
 @task
 def local():
     "Set the deployment target to local."
     env.target = 'local'
+    env.is_remote = False
     env.virtual_env = abspath(sys.prefix)
     env.package_root = dirname(dirname(abspath(__file__)))
     env.project_root = join(env.package_root, '{{ project_name }}')
