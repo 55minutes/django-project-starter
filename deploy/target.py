@@ -7,6 +7,7 @@ from django.utils.crypto import get_random_string
 from fabric.api import env, task
 
 
+# Defaults, override at each target as necessary
 env.project_name = '{{ project_name }}'
 env.db_user = env.project_name
 env.is_remote = True  # Assume we're dealing with a remote host
