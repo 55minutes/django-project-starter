@@ -8,8 +8,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': 'localhost',
-        'NAME': '{{ project_name }}_${target}',
-        'USER': '{{ project_name }}',
+        'NAME': '${project_name}_${target}',
+        'USER': '${db_user}',
         'PASSWORD': '${db_password}',
     },
 }
