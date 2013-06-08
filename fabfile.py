@@ -1,1 +1,2 @@
-from deploy import project, target
+from deploy.settings import *
+from deploy import pg, project, target
