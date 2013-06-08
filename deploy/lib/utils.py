@@ -103,7 +103,7 @@ def get_current_status():
 
 
 def set_db_envs():
-    func = local_python
+    func = pylocal
     if env.is_remote:
         func = pyrun
     db = eval(
