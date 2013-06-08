@@ -8,6 +8,7 @@ from fabric.api import env, task
 
 
 env.project_name = '{{ project_name }}'
+env.db_user = env.project_name
 env.is_remote = True  # Assume we're dealing with a remote host
 
 
