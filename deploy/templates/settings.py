@@ -8,8 +8,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': 'localhost',
-        'NAME': 'etsidata_${target}',
-        'USER': 'etsidata',
+        'NAME': '{{ project_name }}_${target}',
+        'USER': '{{ project_name }}',
         'PASSWORD': '${db_password}',
     },
 }

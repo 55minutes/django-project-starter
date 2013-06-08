@@ -30,7 +30,7 @@ def create_db():
         set_db_envs()
     pg_cmd = (
         'if ! psql -l | grep -w -q {db_name}; then '
-        'createdb -O etsidata {db_name}; fi'
+        'createdb -O {db_user} {db_name}; fi'
     ).format(**env)
     if env.is_remote:
         sudo(pg_cmd, user='postgres')
