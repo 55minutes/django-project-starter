@@ -1,6 +1,3 @@
-from __future__ import print_function
-
-from getpass import getpass
 from os.path import expanduser, join
 from string import Template
 

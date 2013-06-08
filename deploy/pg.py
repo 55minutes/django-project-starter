@@ -205,7 +205,7 @@ def restore(dumpfile):
         set_db_envs()
 
     pgrun(('pg_restore -O -c -n public -h {db_host} -U {db_user} '
-            '-d {db_name} {dumpfile}').format(dumpfile=dumpfile, **env))
+           '-d {db_name} {dumpfile}').format(dumpfile=dumpfile, **env))
     print(green('Database "{db_name}" restored.'.format(**env)))
 
 
