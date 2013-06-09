@@ -1,9 +1,23 @@
 """Development settings and globals."""
 
-
+from fnmatch import fnmatch
 from os.path import join, normpath
+from socket import gethostbyname, gethostname
 
 from .base import *
+
+
+class glob_list(list):
+    def __contains__(self, key):
+        for elt in self:
+            if fnmatch(key, elt):
+                return True
+        return False
+
+
+def local_network_wildcard():
+    my_ip = gethostbyname(gethostname())
+    return '.'.join(my_ip.split('.')[:3] + ['*'])
 
 
 ########## DEBUG CONFIGURATION
@@ -48,10 +62,10 @@ CACHES = {
 
 ########## TOOLBAR CONFIGURATION
 # See: https://github.com/django-debug-toolbar/django-debug-toolbar#installation
+INTERNAL_IPS = glob_list(['127.0.0.1', local_network_wildcard()])
 INSTALLED_APPS += (
     'debug_toolbar',
 )
-INTERNAL_IPS = ('127.0.0.1',)
 MIDDLEWARE_CLASSES += (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
