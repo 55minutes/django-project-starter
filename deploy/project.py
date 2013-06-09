@@ -36,6 +36,14 @@ def local_setup():
         of.write(render_settings())
     print(green('{} generated'.format(env.settings_fp)))
 
+    with open(env.gemset_fp, 'w+') as of:
+        of.write(env.project_name)
+    print(green('{} generated'.format(env.gemset_fp)))
+
+    with open(env.guard_fp, 'w+') as of:
+        of.write(render_template(join(env.template_dir, 'Guardfile'), env))
+    print(green('{} generated'.format(env.guard_fp)))
+
     ve_bin = join(env.virtual_env, 'bin')
     for hook in ('postactivate', 'postdeactivate'):
         hook_file = join(ve_bin, hook)
