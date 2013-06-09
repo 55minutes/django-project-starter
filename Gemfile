@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 group :development do
-  gem 'guard-livereload', require: false
-  gem 'guard-shell',      require: false
-  gem 'rb-fsevent',       require: false
+  gem 'guard-livereload'
+  gem 'guard-shell'
+  gem 'rb-fsevent'
+  gem 'terminal-notifier-guard'
 end
