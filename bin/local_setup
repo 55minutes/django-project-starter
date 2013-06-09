@@ -15,6 +15,7 @@ fab target.local project.setup
 export DJANGO_SETTINGS_MODULE={{ project_name }}.settings
 
 # Set up our ruby environment
+# TODO: Check for existence of rvm, if not, assume rbenv
 rvm use `cat .ruby-version | tr -d "\n" && echo "@" | tr -d "\n" && cat .ruby-gemset`
 bundle
 
