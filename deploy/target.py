@@ -8,8 +8,7 @@ from fabric.api import env, task
 
 
 # Defaults, override at each target as necessary
-env.project_name = '{{ project_name }}'
-env.db_user = env.project_name
+env.db_user = env.name
 env.is_remote = True  # Assume we're dealing with a remote host
 
 
@@ -20,7 +19,7 @@ def local():
     env.is_remote = False
     env.virtual_env = abspath(sys.prefix)
     env.package_root = dirname(dirname(abspath(__file__)))
-    env.project_root = join(env.package_root, '{{ project_name }}')
+    env.project_root = join(env.package_root, env.name)
     env.settings_fp = join(env.project_root, 'settings.py')
     env.static_root = join(env.project_root, 'assets')
     env.guard_fp = join(env.package_root, 'Guardfile')

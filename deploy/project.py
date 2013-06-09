@@ -30,14 +30,17 @@ def render_settings():
 
 def local_setup():
     "Generate {{ project_name }}/settings.py and $VIRTUAL_ENV/bin hooks"
-    require('settings_fp', 'project_name')
+    require(
+        'gemset_fp', 'guard_fp', 'name', 'settings_fp', 'template_dir',
+        'virtual_env'
+    )
 
     with open(env.settings_fp, 'w+') as of:
         of.write(render_settings())
     print(green('{} generated'.format(env.settings_fp)))
 
     with open(env.gemset_fp, 'w+') as of:
-        of.write(env.project_name)
+        of.write(env.name)
     print(green('{} generated'.format(env.gemset_fp)))
 
     with open(env.guard_fp, 'w+') as of:
