@@ -23,6 +23,8 @@ def local():
     env.project_root = join(env.package_root, '{{ project_name }}')
     env.settings_fp = join(env.project_root, 'settings.py')
     env.static_root = join(env.project_root, 'assets')
+    env.guard_fp = join(env.package_root, 'Guardfile')
+    env.gemset_fp = join(env.package_root, '.ruby-gemset')
     env.secret_key = get_random_string(54)
     env.db_user = environ['USER']
     env.db_password = ''
