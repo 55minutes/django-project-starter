@@ -6,5 +6,5 @@ end
 
 guard 'livereload' do
   watch(%r{${project_name}/templates})
-  watch(%r{${project_name}/static/(.+\.(css|js|html)).*}) { |m| "/static/#{m[1]}" }
+  watch(%r{${project_name}/static/(.+\.(css|js)).*}) { |m| "/static/#{m[1]}" }
 end
