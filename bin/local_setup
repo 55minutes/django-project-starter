@@ -16,6 +16,7 @@ export DJANGO_SETTINGS_MODULE={{ project_name }}.settings
 
 # Set up our ruby environment
 rvm use `cat .ruby-version | tr -d "\n" && echo "@" | tr -d "\n" && cat .ruby-gemset`
+bundle
 
 # Create the database, this has to happen after the DJANGO_SETTINGS_MODULE has been set
 fab target.local pg.create_db
