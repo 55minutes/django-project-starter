@@ -6,11 +6,11 @@ import tempfile
 from fabric.api import (
     abort, env, execute, get, hide, put, settings, sudo, task
 )
-from fabric.colors import green
 from fabric.contrib import django as _django
 
 from .lib.tasks import DefaultTargetTask
 from .lib.utils import local, pgrun, run, set_db_envs, set_remote_tempfile
+from .lib.notify import created, notify_ok
 
 
 @task()
@@ -19,7 +19,7 @@ def setup():
     "Install psycopg supporting pacakges and create the cache database"
     with hide('stdout'):
         sudo('aptitude -y install python-dev libpq-dev')
-    print(green('Installed python-dev and libpq-dev packages.'))
+    notify_ok('Installed python-dev and libpq-dev packages.')
     execute(create_cache_db)
 
 
@@ -36,7 +36,7 @@ def create_db():
         sudo(pg_cmd, user='postgres')
     else:
         local(pg_cmd)
-    print(green('Created database: {db_name}.'.format(**env)))
+    created(env.db_name)
 
 
 @task(task_class=DefaultTargetTask)
@@ -47,7 +47,7 @@ def create_cache_db():
         'createdb -O etsidata {cache_db}; fi'
     ).format(**env)
     sudo(pg_cmd, user='postgres')
-    print(green('Created database: {cache_db}.'.format(**env)))
+    created(env.cache_db)
 
 
 @task()
@@ -58,7 +58,7 @@ def local_drop():
     with hide('everything'):
         set_db_envs()
     local('dropdb {db_name}'.format(**env))
-    print(green('Database "{db_name}" dropped!'.format(**env)))
+    notify_ok('Database "{db_name}" dropped!'.format(**env))
 
 
 @task(task_class=DefaultTargetTask)
@@ -70,7 +70,7 @@ def drop_db():
         'if psql -l | grep -w -q {db_name}; then dropdb {db_name}; fi'
     ).format(**env)
     sudo(pg_cmd, user='postgres')
-    print(green('Database "{db_name}" dropped!'.format(**env)))
+    notify_ok('Database "{db_name}" dropped!'.format(**env))
 
 
 def _pg_dump(dumpfile, *tables):
@@ -96,7 +96,7 @@ def dump(dumpfile, *tables):
     with hide('everything'):
         run('mkdir -p {}'.format(path))
     _pg_dump(dumpfile, *tables)
-    print(green('Database exported to {}'.format(dumpfile)))
+    notify_ok('Database exported to {}'.format(dumpfile))
 
 
 @task(task_class=DefaultTargetTask)
@@ -114,7 +114,7 @@ def archive(dumpfile):
               "{db_host} -U {db_user} -f {dumpfile} {db_name}").format(
                   dumpfile=dumpfile, **env)
     pgrun(pg_cmd)
-    print(green('Database archived to {}'.format(dumpfile)))
+    notify_ok('Database archived to {}'.format(dumpfile))
 
 
 @task(task_class=DefaultTargetTask)
@@ -128,7 +128,7 @@ def pull_remote_dump(dumpfile, *tables):
         set_remote_tempfile()
     _pg_dump(env.tempfile, *tables)
     get(env.tempfile, dumpfile)
-    print(green('Database exported to {}'.format(dumpfile)))
+    notify_ok('Database exported to {}'.format(dumpfile))
     run('rm -f {tempfile}'.format(**env))
 
 
@@ -176,7 +176,7 @@ def local_restore(dumpfile):
 
     with settings(warn_only=True), hide('warnings'):
         local('pg_restore -O -c -d {db_name} {dumpfile}'.format(**env))
-    print(green('Database "{db_name}" restored.'.format(**env)))
+    notify_ok('Database "{db_name}" restored.'.format(**env))
 
 
 @task(task_class=DefaultTargetTask)
@@ -206,7 +206,7 @@ def restore(dumpfile):
 
     pgrun(('pg_restore -O -c -n public -h {db_host} -U {db_user} '
            '-d {db_name} {dumpfile}').format(dumpfile=dumpfile, **env))
-    print(green('Database "{db_name}" restored.'.format(**env)))
+    notify_ok('Database "{db_name}" restored.'.format(**env))
 
 
 @task(task_class=DefaultTargetTask)

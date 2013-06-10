@@ -2,9 +2,9 @@ from os.path import expanduser, join
 from string import Template
 
 from fabric.api import env, prompt, require, task
-from fabric.colors import green
 from fabric.utils import apply_lcwd
 
+from .lib.notify import created, generated
 
 def render_template(filename, context=None):
     filename = apply_lcwd(filename, env)
@@ -37,22 +37,22 @@ def local_setup():
 
     with open(env.settings_fp, 'w+') as of:
         of.write(render_settings())
-    print(green('{} generated'.format(env.settings_fp)))
+    generated(env.settings_fp)
 
     with open(env.gemset_fp, 'w+') as of:
         of.write(env.name)
-    print(green('{} generated'.format(env.gemset_fp)))
+    generated(env.gemset_fp)
 
     with open(env.guard_fp, 'w+') as of:
         of.write(render_template(join(env.template_dir, 'Guardfile'), env))
-    print(green('{} generated'.format(env.guard_fp)))
+    generated(env.guard_fp)
 
     ve_bin = join(env.virtual_env, 'bin')
     for hook in ('postactivate', 'postdeactivate'):
         hook_file = join(ve_bin, hook)
         with open(hook_file, 'w+') as of:
             of.write(render_template(join(env.template_dir, hook), env))
-        print(green('{} generated'.format(hook_file)))
+        generated(hook_file)
 
 
 @task()
