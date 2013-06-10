@@ -144,6 +144,7 @@ Running the script out of the box will:
 7.  Install Ruby dependencies
 8.  Install Node.js dependencies
 9.  Create the development database
+10. Create the `STATIC_ROOT` directory
 
 ## Acknowledgements
 
