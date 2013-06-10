@@ -22,31 +22,41 @@ An opinionated project template for Django 1.5.1 featuring:
     * [Node.js][]
     * [PostgreSQL][]
 2.  Set up your Python virtual environment:
+
     ```bash
     mkdir icecream
     cd icecream
     mkvirtualenv -a `pwd` icecream-dev
     add2virtualenv `pwd`
     ```
+
 3.  Install Django:
+
     ```bash
     pip install django
     ```
+
 4.  Star a new project in your working directory:
+
     ```bash
     django-admin.py startproject \
       --template=https://github.com/55minutes/django-project-template/archive/master.zip \
       --extension=py,md,html --name=local_setup icecream .
     ```
+
 5.  Set up the development environment and start the Django development server:
+
     ```bash
     source bin/local_setup
     django-admin.py runserver 0.0.0.0:8000
     ```
+
 6.  Start Guard in another shell:
+
     ```bash
     guard
     ```
+
 7.  Point your browsers at <http://localhost:8000> and you should see the
     sample template rendered.
 8.  When you make changes to anything in the following directories, your
