@@ -2,9 +2,12 @@ from os.path import expanduser, join
 from string import Template
 
 from fabric.api import env, prompt, require, task
+from fabric.contrib import django
 from fabric.utils import apply_lcwd
 
 from .lib.notify import created, generated
+from .lib.utils import local
+
 
 def render_template(filename, context=None):
     filename = apply_lcwd(filename, env)
@@ -53,6 +56,11 @@ def local_setup():
         with open(hook_file, 'w+') as of:
             of.write(render_template(join(env.template_dir, hook), env))
         generated(hook_file)
+
+    django.project(env.name)
+    from django.conf import settings
+    local('mkdir -p {}'.format(settings.STATIC_ROOT))
+    created(settings.STATIC_ROOT)
 
 
 @task()
