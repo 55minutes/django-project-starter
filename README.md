@@ -1,6 +1,6 @@
 # django-project-template
 
-An opinionated project template for Django 1.5.1 featuring:
+An opinionated project template for Django 1.5.2 featuring:
 
 * Proven project layout
 * [PostgreSQL][]
@@ -10,7 +10,7 @@ An opinionated project template for Django 1.5.1 featuring:
   you change your presentation related files
 * Automatically regenerates [ctags][] when any `.py` files change
 * Optimized for development on OS X, but should work in most Linux environments
-  well
+  as well
 * Deploy to a [DigitalOcean][] Ubuntu 12.04 droplet
 
 ## Sounds good, how do I get started?
@@ -64,8 +64,8 @@ An opinionated project template for Django 1.5.1 featuring:
     * ice_cream/templates
     * ice_cream/static
 
-*Note: these instructions show creation of a project called "**icecream**".
-You should replace this name with the actual name of your project.*
+_Note: these instructions show creation of a project called "**icecream**".
+You should replace this name with the actual name of your project._
 
 ---
 
