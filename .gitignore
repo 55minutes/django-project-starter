@@ -16,4 +16,9 @@ build
 
 # Logs:
 *.log
+
+# node:
 node_modules
+
+# Django:
+settings.py
