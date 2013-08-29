@@ -8,7 +8,7 @@ else
 fi
 
 # Pip install the requirements
-pip install -U -r $req
+pip install -r $req
 fab target.local project.setup
 
 # Set up our ruby environment
