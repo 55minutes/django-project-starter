@@ -13,24 +13,26 @@ else
     req='requirements/local.txt'
 fi
 
+
 # Pip install the requirements
 pip install -r $req
 fab target.local project.setup
+
 
 # Set up our ruby environment
 # TODO: Check for existence of rvm, if not, assume rbenv
 rvm use `cat .ruby-version | tr -d "\n" && echo "@" | tr -d "\n" && cat .ruby-gemset`
 bundle
 
+
 # Install node.js dependencies
 [ -d node_modules ] && rm -rf node_modules
 npm install
 
-# Set Django environment, this has to be run before Fabric can be used
-[[ -f {{ project_name }}/settings.py ]] && export DJANGO_SETTINGS_MODULE={{ project_name }}.settings
 
-# Set node.js bin
-[[ -d `npm bin` ]] && export PATH=`npm bin`:$PATH
+# Run the postactivate hook
+virtualenvwrapper_run_hook post_activate
+
 
 # Create the database, this has to happen after the DJANGO_SETTINGS_MODULE has been set
 fab target.local pg.create_db
