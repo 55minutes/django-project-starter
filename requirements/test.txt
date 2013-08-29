@@ -2,4 +2,4 @@
 
 # Test dependencies go here.
 coverage==3.6
-django-discover-runner==0.4
+django-discover-runner==1.0
