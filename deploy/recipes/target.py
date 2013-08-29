@@ -18,10 +18,10 @@ def local():
     env.target = 'local'
     env.is_remote = False
     env.virtual_env = abspath(sys.prefix)
-    env.package_root = dirname(dirname(abspath(__file__)))
+    env.package_root = abspath(join(dirname(__file__), '../..'))
     env.project_root = join(env.package_root, env.name)
     env.settings_fp = join(env.project_root, 'settings.py')
-    env.static_root = join(env.project_root, 'assets')
+    env.static_root = join(env.project_root, 'static')
     env.guard_fp = join(env.package_root, 'Guardfile')
     env.gemset_fp = join(env.package_root, '.ruby-gemset')
     env.secret_key = get_random_string(54)
