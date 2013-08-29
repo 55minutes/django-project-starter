@@ -8,9 +8,9 @@ from fabric.api import (
 )
 from fabric.contrib import django as _django
 
-from .lib.tasks import DefaultTargetTask
-from .lib.utils import local, pgrun, run, set_db_envs, set_remote_tempfile
-from .lib.notify import created, notify_ok
+from ..helpers.notify import created, notify_ok
+from ..helpers.tasks import DefaultTargetTask
+from ..helpers.utils import local, pgrun, run, set_db_envs, set_remote_tempfile
 
 
 @task()

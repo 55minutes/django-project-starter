@@ -1,2 +1,2 @@
 from deploy.settings import *
-from deploy import pg, project, target
+from deploy.recipes import pg, project, target

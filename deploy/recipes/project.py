@@ -5,8 +5,8 @@ from fabric.api import env, prompt, require, task
 from fabric.contrib import django
 from fabric.utils import apply_lcwd
 
-from .lib.notify import created, generated
-from .lib.utils import local
+from ..helpers.notify import created, generated
+from ..helpers.utils import local
 
 
 def render_template(filename, context=None):
