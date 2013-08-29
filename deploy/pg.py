@@ -36,7 +36,7 @@ def create_db():
         sudo(pg_cmd, user='postgres')
     else:
         local(pg_cmd)
-    created(env.db_name)
+    created('database {}'.format(env.db_name))
 
 
 @task(task_class=DefaultTargetTask)
