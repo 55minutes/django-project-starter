@@ -20,13 +20,8 @@ def render_settings():
     "Render Django settings file"
     require('target', 'static_root')
 
-    secrets = {
-        'db_password': 'PostgreSQL password: ',
-        'postmark_api_key': 'Postmark API Key: ',
-        'secret_key': 'Project-wide SECRET_KEY: ',
-    }
-    for k, msg in ((k, v) for k, v in secrets.items()
-                   if not env.get(k, False)):
+    for k, msg in ((k, v) for k, v in env.get('secrets', {}).items()
+                   if env.get(k) is None):
         prompt(msg, key=k)
     return render_template(join(env.template_dir, 'settings.py'), env)
 
