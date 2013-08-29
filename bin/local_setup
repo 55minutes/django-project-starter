@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Set up virtualenv
+setvirtualenvproject
+add2virtualenv -d `pwd`
+add2virtualenv `pwd`
+
+
 # Specify your own requirements file, otherwise default to requirements/local.txt
 if [ $# -ne 0 ]; then
     req=$1
