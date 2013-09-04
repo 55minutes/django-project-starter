@@ -21,7 +21,7 @@ fab target.local project.setup
 
 # Set up our ruby environment
 # TODO: Check for existence of rvm, if not, assume rbenv
-rvm use `cat .ruby-version | tr -d "\n" && echo "@" | tr -d "\n" && cat .ruby-gemset`
+rvm use --create `cat .ruby-version | tr -d "\n" && echo "@" | tr -d "\n" && cat .ruby-gemset`
 bundle
 
 
