@@ -36,3 +36,4 @@ virtualenvwrapper_run_hook post_activate
 
 # Create the database, this has to happen after the DJANGO_SETTINGS_MODULE has been set
 fab target.local pg.create_db
+django-admin.py syncdb --noinput
