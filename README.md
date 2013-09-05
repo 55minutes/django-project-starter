@@ -27,7 +27,6 @@ An opinionated project template for Django 1.5.2 featuring:
     mkdir icecream
     cd icecream
     mkvirtualenv -a `pwd` icecream-dev
-    add2virtualenv `pwd`
     ```
 
 3.  Install Django:
