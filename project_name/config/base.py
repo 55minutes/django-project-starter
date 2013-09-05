@@ -194,7 +194,7 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     'pipeline',
     'south',
-    'twitter_bootstrap',
+    'django_bootstrap_sass',
 )
 
 # Apps specific for this project go here.
@@ -250,40 +250,47 @@ WSGI_APPLICATION = '{{ project_name }}.wsgi.application'
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 PIPELINE_CSS = {
-    'bootstrap': {
-        'source_filenames': (
-            'less/bootstrap.less',
-            'less/responsive.less',
+    'bootstrap': dict(
+        source_filenames=(
+            'stylesheets/bootstrap.scss',
         ),
-        'output_filename': 'css/bootstrap.css',
-        'extra_context': {
+        output_filename='stylesheets/bootstrap.css',
+        extra_context={
             'media': 'screen,projection',
         }
-    }
+    ),
+    'project': dict(
+        source_filenames=(
+            'stylesheets/project.scss',
+        ),
+        output_filename='stylesheets/project.css',
+        extra_context={
+            'media': 'screen,projection',
+        }
+    )
 }
 
 PIPELINE_JS = {
     'bootstrap': dict(
         source_filenames=(
-            'js/bootstrap-affix.js',
-            'js/bootstrap-alert.js',
-            'js/bootstrap-button.js',
-            'js/bootstrap-carousel.js',
-            'js/bootstrap-collapse.js',
-            'js/bootstrap-dropdown.js',
-            'js/bootstrap-modal.js',
-            'js/bootstrap-popover.js',
-            'js/bootstrap-scrollspy.js',
-            'js/bootstrap-tab.js',
-            'js/bootstrap-tooltip.js',
-            'js/bootstrap-transition.js',
-            'js/bootstrap-typeahead.js',
+            'javascripts/transition.js',
+            'javascripts/alert.js',
+            'javascripts/button.js',
+            'javascripts/carousel.js',
+            'javascripts/collapse.js',
+            'javascripts/dropdown.js',
+            'javascripts/modal.js',
+            'javascripts/tooltip.js',
+            'javascripts/popover.js',
+            'javascripts/scrollspy.js',
+            'javascripts/tab.js',
+            'javascripts/affix.js'
         ),
-        output_filename = 'js/bootstrap.js',
+        output_filename = 'javascripts/bootstrap.js',
     )
 }
 
 PIPELINE_COMPILERS = (
-    'pipeline.compilers.less.LessCompiler',
+    'pipeline.compilers.sass.SASSCompiler',
 )
 ########## END DJANGO-PIEPLINE CONFIGURATION
