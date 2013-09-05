@@ -5,13 +5,18 @@ guard :shell do
 end
 
 guard 'livereload' do
-  watch(%r{${name}/templates}) do |m|
+  watch(%r{${name}/templates/.*}) do |m|
     Notifier.notify(m[0], :title => 'livereload')
     m
   end
 
-  watch(%r{${name}/static/(.+\.(css|js)).*}) do |m|
-    Notifier.notify(m[1], :title => 'livereload')
-    "/static/#{m[1]}"
+  watch(%r{${name}/assets/javascripts/.*}) do |m|
+    Notifier.notify(m[0], :title => 'livereload')
+    m
+  end
+
+  watch(%r{${name}/assets/stylesheets/(?!\.sass-cache).*}) do |m|
+    Notifier.notify(m[0], :title => 'livereload')
+    m
   end
 end
